@@ -24,21 +24,34 @@ Dự án sử dụng SQLite (`FaceBase.db`) để lưu trữ thông tin. Cấu t
 | **Age** | `INTEGER` | Tuổi |
 | **Gender** | `TEXT` | Giới tính |
 
-### SQL Query tạo bảng:
-```sql
-CREATE TABLE "People" (
-    "ID" INTEGER NOT NULL,
-    "Name" TEXT,
-    "Age" INTEGER,
-    "Gender" TEXT,
-    PRIMARY KEY("ID")
-);
-
 ## 📂 4. Cấu trúc thư mục dự án
-├── Anh/                   # Thư mục lưu trữ các ảnh mẫu chụp từ camera
-├── FaceBase.db            # Tệp cơ sở dữ liệu SQLite
-├── trainingData.yml       # Tệp chứa dữ liệu sau khi đã huấn luyện
-├── haarcascade_frontalface_default.xml # File cấu hình phát hiện khuôn mặt
-├── Laymau.py              # Script chụp ảnh mẫu và nhập liệu CSDL
-├── Training.py            # Script huấn luyện bộ nhận diện
-└── Nhandien.py            # Script thực hiện nhận diện thực tế
+```text
+├── Anh/                   # Thư mục lưu ảnh mẫu (.jpg)
+├── FaceBase.db            # Cơ sở dữ liệu SQLite
+├── trainingData.yml       # Dữ liệu sau khi huấn luyện
+├── haarcascade_frontalface_default.xml # File cấu hình nhận diện
+├── Laymau.py              # Thu thập ảnh và lưu SQL
+├── Training.py            # Huấn luyện Model
+└── Nhandien.py            # Chạy ứng dụng thực tế
+```
+## 🚀 5. Hướng dẫn thiết lập và vận hành
+
+### Bước 1: Cài đặt môi trường
+
+Mở **Terminal** và chạy lệnh:
+
+```bash
+pip install opencv-python opencv-contrib-python numpy Pillow
+```
+### Bước 2: Quy trình thực hiện (Quan trọng)
+* **Chạy Laymau.py:
+* Nhập ID (dạng số) và Tên của bạn vào console khi được yêu cầu.
+* Camera sẽ tự động mở, hãy nhìn thẳng vào camera. Máy sẽ chụp khoảng 20 tấm ảnh mẫu và lưu vào thư mục Anh/.
+* **Chạy Huan_luyen.py:
+* Chương trình sẽ quét toàn bộ ảnh trong thư mục Anh/ để trích xuất đặc trưng khuôn mặt.
+Sau khi quá trình huấn luyện hoàn tất, file trainingData.yml sẽ được khởi tạo trong thư mục dự án.
+* **Chạy Nhan_dang.py:
+* Đây là bước cuối cùng để mở camera nhận diện.
+* Tên và thông tin cá nhân của bạn sẽ hiển thị ngay trên khung chữ nhật bao quanh khuôn mặt nếu nhận diện thành công.
+
+
